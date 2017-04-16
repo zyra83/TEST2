@@ -1,0 +1,12 @@
+14/04/2017 19:29:38 (LoggerFactory.java:29) DEBUG - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+14/04/2017 19:29:38 (Version.java:27) INFO  - HV000001: Hibernate Validator 5.1.1.Final
+14/04/2017 19:29:38 (DefaultTraversableResolver.java:106) DEBUG - Found javax.persistence.Persistence on classpath containing 'getPersistenceUtil'. Assuming JPA 2 environment. Trying to instantiate JPA aware TraversableResolver
+14/04/2017 19:29:38 (DefaultTraversableResolver.java:117) DEBUG - Instantiated JPA aware TraversableResolver of type org.hibernate.validator.internal.engine.resolver.JPATraversableResolver.
+14/04/2017 19:29:38 (ValidationXmlParser.java:88) DEBUG - Trying to load META-INF/validation.xml for XML based Validator configuration.
+14/04/2017 19:29:38 (ValidationXmlParser.java:95) DEBUG - No META-INF/validation.xml found. Using annotation based configuration only.
+14/04/2017 19:29:39 (PlatformResourceBundleLocator.java:72) DEBUG - ValidationMessages not found.
+14/04/2017 19:29:39 (PlatformResourceBundleLocator.java:69) DEBUG - org.hibernate.validator.ValidationMessages found.
+14/04/2017 19:29:39 (PlatformResourceBundleLocator.java:72) DEBUG - ValidationMessages not found.
+14/04/2017 19:29:39 (PlatformResourceBundleLocator.java:69) DEBUG - org.hibernate.validator.ValidationMessages found.
+14/04/2017 19:29:39 (PlatformResourceBundleLocator.java:72) DEBUG - ValidationMessages not found.
+14/04/2017 19:29:39 (PlatformResourceBundleLocator.java:69) DEBUG - org.hibernate.validator.ValidationMessages found.
