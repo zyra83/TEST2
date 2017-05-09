@@ -1,5 +1,0 @@
-my-database:
-  build: .
-  ports:
-   - "3306:3306"
-

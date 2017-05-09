@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox fx:id="racine" xmlns:fx="http://javafx.com/fxml/1" fx:controller="monappli.presenter.BarreMenuPresenter">
+   <children>
+      <MenuBar HBox.hgrow="ALWAYS">
+        <menus>
+          <Menu mnemonicParsing="false" text="UC">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#listerVoitures" text="Lister les voitures" />
+              <MenuItem mnemonicParsing="false" onAction="#ajouterVoiture" text="Ajouter une voiture" />
+              <MenuItem mnemonicParsing="false" onAction="#afficherStats" text="Voir les stats" />
+              <MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Aide">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#infDialAPropos" text="A propos" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</HBox>
