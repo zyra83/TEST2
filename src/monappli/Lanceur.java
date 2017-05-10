@@ -26,6 +26,7 @@ public class Lanceur extends Application {
 
 	/**
 	 * Lance l'application FX.
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {

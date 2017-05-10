@@ -10,6 +10,9 @@ public final class FacadeFactory {
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * @return la fabrique Métier
+	 */
 	public static IFacadeMetier fabriquerFacadeMetier(){
 		return new FacadeMetier();
 	}
