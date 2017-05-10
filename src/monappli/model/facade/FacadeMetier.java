@@ -3,7 +3,7 @@ package monappli.model.facade;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 
@@ -42,11 +42,14 @@ public class FacadeMetier implements IFacadeMetier {
 	}
 
 	@Override
-	public void init() throws InitialisationImpossibleException {
+	public void init(Path p) throws InitialisationImpossibleException {
 		try {
-			List<String> lignes = Files.readAllLines(Paths.get("prestations.csv"));
+			List<String> lignes = Files.readAllLines(p);
 			for (String ligne : lignes) {
 				String[] tab = ligne.split(";");
+				if (log.isInfoEnabled()) {
+					log.info(String.format("Import de %s %s", tab[0], tab[1]));
+				}
 				Prestation prest = PrestationFactory.fabriquerPrestation(tab[0], tab[1]);
 				// Teste la presence ou non de l'instrument
 				if (!persistenceP.existByName(prest)) {
@@ -54,9 +57,9 @@ public class FacadeMetier implements IFacadeMetier {
 				}
 			}
 			if (log.isInfoEnabled()) {
-				log.info("Initialisation de prestations en base...");
+				log.info("Import du CSV en base...");
 			}
-		} catch (RuntimeException | IOException e) {
+		} catch (IOException | RuntimeException e) {
 			if (log.isWarnEnabled()) {
 				log.warn(Messages.INITIALISATION_IMPOSSIBLE_EXC, e);
 			}

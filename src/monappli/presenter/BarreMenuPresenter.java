@@ -1,6 +1,8 @@
 package monappli.presenter;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import javafx.event.EventHandler;
@@ -8,18 +10,28 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import lombok.extern.apachecommons.CommonsLog;
+import monappli.model.facade.exceptions.FacadeMetierException;
+import monappli.model.facade.exceptions.InitialisationImpossibleException;
 
+/**
+ * Présenteur de la barre de menu de l'application.
+ * 
+ * @author mickael
+ *
+ */
 @CommonsLog
-public class BarreMenuPresenter {
+public class BarreMenuPresenter extends AbstractPresenter {
 
 	@FXML
 	private HBox racine;
@@ -34,10 +46,10 @@ public class BarreMenuPresenter {
 	 * quitter.
 	 */
 	private EventHandler<WindowEvent> confirmCloseEventHandler = event -> {
-		Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit?");
+		Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION, "Êtes-vous sûr de vouloir quitter ?");
 		Button exitButton = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
-		exitButton.setText("Exit");
-		closeConfirmation.setHeaderText("Confirm Exit");
+		exitButton.setText("Quitter");
+		closeConfirmation.setHeaderText("Quitter l'application");
 		closeConfirmation.initModality(Modality.APPLICATION_MODAL);
 		closeConfirmation.initOwner(primaryStage);
 
@@ -75,13 +87,22 @@ public class BarreMenuPresenter {
 	private void importer() {
 		// Demander le chargement du FXML de la vue Lister
 		try {
-			VBox vueLister = (VBox) FXMLLoader.load(getClass().getResource("/monappli/view/fx/Import.fxml"));
+			String userprofile = System.getProperty("user.home"); 
+			FileChooser fc = new FileChooser();
+			fc.setInitialDirectory(new File(userprofile));
+			 
+			// Filtre d'exstension, ici, uniquement les CSV, JPEG, PNG.
+			fc.getExtensionFilters().add(new ExtensionFilter("PDF", "*.pdf", "*.PDF"));
+			fc.getExtensionFilters().add(new ExtensionFilter("CSV", "*.csv", "*.CSV"));
+			fc.getExtensionFilters().add(new ExtensionFilter("Images", "*.jpg", "*.jpeg", "*.png", "*.JPG", "*.JPEG", "*.PNG"));
+			
+			File selectedFile = fc.showOpenDialog(racine.getScene().getWindow()); 
+			
+			if(selectedFile != null){
+				getLeMetier().init(selectedFile.toPath());
+			}
 
-			// Recuperer une reference de la scene et changer le graphe de scene
-			Scene scene = racine.getScene();
-			scene.setRoot(vueLister);
-
-		} catch (IOException e) {
+		} catch (InitialisationImpossibleException e) {
 			if (log.isErrorEnabled())
 				log.error(e.getMessage());
 		}

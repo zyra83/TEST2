@@ -1,6 +1,7 @@
 package monappli.model.facade;
 
 import java.math.BigDecimal;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ public interface IFacadeMetier {
 	/**
 	 * Initialisation de prestations en base depuis un fichier fourni
 	 */
-	void init() throws InitialisationImpossibleException;
+	void init(Path p) throws InitialisationImpossibleException;
 
 	/**
 	 * Fonctionnalité "Ajouter un abonné"
